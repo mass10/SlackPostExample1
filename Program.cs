@@ -2,8 +2,12 @@
 
 namespace SlackPostExample1
 {
-	class Program
+	internal sealed class Program
 	{
+		/// <summary>
+		/// このアプリケーションのントリーポイント
+		/// </summary>
+		/// <param name="args">コマンドライン引数</param>
 		static void Main(string[] args)
 		{
 			// コンフィギュレーション
