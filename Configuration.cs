@@ -42,7 +42,7 @@ namespace SlackPostExample1
 		/// <returns></returns>
 		public string GetString(string key)
 		{
-			return "" + this._settings["slack_accesskey"];
+			return "" + this._settings[key];
 		}
 	}
 }
