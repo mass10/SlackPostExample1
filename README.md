@@ -2,7 +2,7 @@
 
 C# で Slack にファイルを投稿します。
 
-![お告げ](blob/main/.images/お告げ.png)
+![お告げ](./.images/お告げ.png)
 
 # 補足
 
