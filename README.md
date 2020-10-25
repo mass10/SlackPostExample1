@@ -11,7 +11,7 @@ C# で Slack にファイルを投稿します。
 
 # コンフィギュレーション
 
-```JSON
+```JSON[.settings.json]
 {
 	"slack_accesskey": "xoxb-000000000000-0000000000000-XXXXXXXXXXXXXXXXXXXXXXXX"
 }
