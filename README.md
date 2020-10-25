@@ -9,3 +9,10 @@ C# で Slack にファイルを投稿します。
 * Visual Studio 2019 でビルドしています。
 * あらかじめ Slack Application を作成しておきます。
 
+# コンフィギュレーション
+
+```JSON
+{
+	"slack_accesskey": "xoxb-000000000000-0000000000000-XXXXXXXXXXXXXXXXXXXXXXXX"
+}
+```
