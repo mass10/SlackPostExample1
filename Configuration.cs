@@ -16,11 +16,25 @@ namespace SlackPostExample1
 		private Newtonsoft.Json.Linq.JObject _settings = null;
 
 		/// <summary>
+		/// 唯一のインスタンス
+		/// </summary>
+		private static readonly Configuration _instance = new Configuration();
+
+		/// <summary>
 		/// コンストラクター
 		/// </summary>
-		public Configuration()
+		private Configuration()
 		{
 
+		}
+
+		/// <summary>
+		/// インスタンスを返します。返却されるのは常に同一のインスタンスです。
+		/// </summary>
+		/// <returns>インスタンス</returns>
+		public static Configuration GetInstance()
+		{
+			return _instance;
 		}
 
 		/// <summary>
@@ -32,7 +46,6 @@ namespace SlackPostExample1
 			string content = System.IO.File.ReadAllText(path, Encoding.UTF8);
 			var unknown_data = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
 			this._settings = (Newtonsoft.Json.Linq.JObject)unknown_data;
-
 		}
 
 		/// <summary>
