@@ -8,11 +8,30 @@ namespace SlackPostExample1
 		/// このアプリケーションのントリーポイント
 		/// </summary>
 		/// <param name="args">コマンドライン引数</param>
-		static void Main(string[] args)
+		public static void Main(string[] args)
+		{
+			try
+			{
+				// コンフィギュレーション
+				var conf = Configuration.GetInstance();
+				conf.Configure();
+
+				// テキストを投稿します。
+				PostText();
+
+				// ファイルを付けてテキストを投稿します。
+				PostTextWithFile();
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("[ERROR] {0}", e);
+			}
+		}
+
+		private static void PostTextWithFile()
 		{
 			// コンフィギュレーション
-			var conf = new Configuration();
-			conf.Configure();
+			var conf = Configuration.GetInstance();
 
 			var client = new SimpleClient();
 
@@ -31,6 +50,29 @@ namespace SlackPostExample1
 
 			// リクエスト送出
 			var response = client.Post("https://slack.com/api/files.upload");
+
+			Console.WriteLine(response);
+		}
+
+		private static void PostText()
+		{
+			// コンフィギュレーション
+			var conf = Configuration.GetInstance();
+
+			var client = new SimpleClient();
+
+			// トークン(※Slack Application のページから出力されたものを使用します)
+			var slackAccessToken = conf.GetString("slack_accesskey");
+			client.AddHeader("Authorization", "Bearer " + slackAccessToken);
+
+			// 投稿先チャネル
+			client.AddFormData("channel", "notifications");
+
+			// メッセージ
+			client.AddFormData("text", "こんにちは🌮");
+
+			// リクエスト送出
+			var response = client.Post("https://slack.com/api/chat.postMessage");
 
 			Console.WriteLine(response);
 		}
