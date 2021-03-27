@@ -28,6 +28,9 @@ namespace SlackPostExample1
 			}
 		}
 
+		/// <summary>
+		/// ファイルを付けてテキストを投稿します。
+		/// </summary>
 		private static void PostTextWithFile()
 		{
 			// コンフィギュレーション
@@ -54,6 +57,9 @@ namespace SlackPostExample1
 			Console.WriteLine(response);
 		}
 
+		/// <summary>
+		/// テキストを投稿します。
+		/// </summary>
 		private static void PostText()
 		{
 			// コンフィギュレーション
