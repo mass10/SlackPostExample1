@@ -27,10 +27,6 @@ namespace SlackPostExample1
 			// 「SSL/TLS のセキュリティで保護されているチャネルを作成できませんでした」の回避
 			System.Net.ServicePointManager.SecurityProtocol =
 				System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls12;
-
-			this._client = new System.Net.Http.HttpClient();
-
-			this._form = new System.Net.Http.MultipartFormDataContent();
 		}
 
 		/// <summary>
@@ -40,7 +36,8 @@ namespace SlackPostExample1
 		/// <param name="value"></param>
 		public void AddHeader(string name, string value)
 		{
-			this._client.DefaultRequestHeaders.Add(name, value);
+			var client = this.GetHttpClient();
+			client.DefaultRequestHeaders.Add(name, value);
 		}
 
 		/// <summary>
@@ -51,7 +48,8 @@ namespace SlackPostExample1
 		public void AddFormData(string name, string value)
 		{
 			var field = new System.Net.Http.StringContent(value);
-			this._form.Add(field, name);
+			var form = this.GetForm();
+			form.Add(field, name);
 		}
 
 		/// <summary>
@@ -68,7 +66,8 @@ namespace SlackPostExample1
 			var fileContent = new System.Net.Http.StreamContent(System.IO.File.OpenRead(path));
 			fileContent.Headers.ContentDisposition = attachment;
 
-			this._form.Add(fileContent);
+			var form = this.GetForm();
+			form.Add(fileContent);
 		}
 
 		/// <summary>
@@ -78,8 +77,46 @@ namespace SlackPostExample1
 		/// <returns></returns>
 		public string Post(string url)
 		{
-			var response = this._client.PostAsync(url, this._form).Result;
-			return response.Content.ReadAsStringAsync().Result;
+			try
+			{
+				var form = this.GetForm();
+				var client = this.GetHttpClient();
+				var response = client.PostAsync(url, form).Result;
+				return response.Content.ReadAsStringAsync().Result;
+			}
+			finally
+			{
+				this.Close();
+			}
+		}
+
+		/// <summary>
+		/// 現在のセッションをクローズします。
+		/// </summary>
+		private void Close()
+		{
+			this._client = null;
+			this._form = null;
+		}
+
+		private System.Net.Http.HttpClient GetHttpClient()
+		{
+			if (this._client != null)
+				return this._client;
+			this._client = new System.Net.Http.HttpClient();
+			return this._client;
+		}
+
+		/// <summary>
+		/// フォームオブジェクトを取得します。
+		/// </summary>
+		/// <returns></returns>
+		private System.Net.Http.MultipartFormDataContent GetForm()
+		{
+			if (this._form != null)
+				return this._form;
+			this._form = new System.Net.Http.MultipartFormDataContent();
+			return this._form;
 		}
 	}
 }
