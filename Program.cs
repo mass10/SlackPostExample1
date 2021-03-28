@@ -27,6 +27,9 @@ namespace SlackPostExample1
 		/// <summary>
 		/// ファイルを付けてテキストを投稿します。
 		/// </summary>
+		/// <param name="channel">チャネル</param>
+		/// <param name="text">テキスト</param>
+		/// <param name="file">ファイル</param>
 		private static void PostTextWithFile(string channel, string text, string file)
 		{
 			// コンフィギュレーション
