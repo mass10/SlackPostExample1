@@ -44,8 +44,8 @@ namespace SlackPostExample1
 		{
 			const string path = ".settings.json";
 			string content = System.IO.File.ReadAllText(path, Encoding.UTF8);
-			var unknown_data = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
-			this._settings = (Newtonsoft.Json.Linq.JObject)unknown_data;
+			var unknownData = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
+			this._settings = (Newtonsoft.Json.Linq.JObject)unknownData;
 		}
 
 		/// <summary>
