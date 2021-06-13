@@ -2,7 +2,10 @@
 
 C# で Slack にファイルを投稿します。
 
-![お告げ](./.images/お告げ.png)
+<!-- ![お告げ](./.images/お告げ.png) -->
+
+![image](https://user-images.githubusercontent.com/2055840/121793380-6c78f280-cc39-11eb-8a0f-52e0f376b4ff.png)
+
 
 # 補足
 
